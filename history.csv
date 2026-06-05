@@ -1,0 +1,5 @@
+Date,H2,CH4,C2H6,C2H4,C2H2,Diagnosis,Confidence_%
+2026-06-05 11:48:46,100.0,50.0,20.0,10.0,5.0,Low-temperature overheating,60.0
+2026-06-05 11:49:21,100.0,50.0,20.0,10.0,5.0,Low-temperature overheating,60.0
+2026-06-05 11:56:31,100.0,50.0,20.0,10.0,5.0,Low-temperature overheating,60.0
+2026-06-05 11:57:26,100.0,50.0,20.0,10.0,5.0,Partial discharge,66.67

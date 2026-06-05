@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sonelgaz | AI Predictive Maintenance</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        /* 1. إعدادات الخلفية والخطوط */
+        body {
+            font-family: 'Poppins', sans-serif;
+            /* خلفية لمحطة طاقة/محولات داكنة واحترافية */
+            background: url('https://images.unsplash.com/photo-1473643265554-c8b1bbdc51a8?auto=format&fit=crop&w=1920&q=80') no-repeat center center fixed;
+            background-size: cover;
+            min-height: 100vh;
+            color: #ffffff;
+            position: relative;
+        }
+
+        /* طبقة تعتيم فوق الصورة لزيادة وضوح النص (Overlay) */
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(135deg, rgba(0, 34, 68, 0.85) 0%, rgba(0, 15, 30, 0.95) 100%);
+            z-index: -1;
+        }
+
+        /* 2. شريط التنقل العلوي (Navbar) */
+        .navbar-custom {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 15px 0;
+        }
+        .logo-container {
+            background: white;
+            padding: 5px 15px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        /* 3. تأثير الزجاج المضيء للبطاقة الرئيسية (Glassmorphism) */
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 24px;
+            padding: 40px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* 4. تصميم حقول الإدخال (Inputs) */
+        .form-label {
+            font-weight: 600;
+            letter-spacing: 1px;
+            color: #a0aec0;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+        }
+        .form-control {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #ffffff;
+            border-radius: 12px;
+            padding: 12px 15px;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+        }
+        .form-control:focus {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: #f39c12; /* أصفر سونلغاز */
+            box-shadow: 0 0 15px rgba(243, 156, 18, 0.4);
+            color: #ffffff;
+        }
+        /* إخفاء الأسهم من حقول الأرقام */
+        input[type=number]::-webkit-inner-spin-button { -webkit-appearance: none; }
+
+        /* 5. تصميم زر الـ 3D (3D Button) */
+        .btn-3d {
+            background: linear-gradient(145deg, #f39c12, #d68910);
+            color: white;
+            font-weight: 800;
+            font-size: 1.2rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            border: none;
+            border-radius: 12px;
+            padding: 15px 30px;
+            width: 100%;
+            cursor: pointer;
+            box-shadow: 0 8px 0 #a04000, 0 15px 20px rgba(0,0,0,0.4);
+            transition: all 0.1s ease-in-out;
+            margin-top: 20px;
+        }
+        .btn-3d:hover {
+            background: linear-gradient(145deg, #f1c40f, #e67e22);
+            box-shadow: 0 6px 0 #a04000, 0 10px 15px rgba(0,0,0,0.4);
+            transform: translateY(2px);
+            color: #fff;
+        }
+        .btn-3d:active {
+            box-shadow: 0 0 0 #a04000, 0 0 0 rgba(0,0,0,0);
+            transform: translateY(8px); /* تأثير الضغط الحقيقي */
+        }
+
+        /* 6. بطاقة النتيجة (Result Card) */
+        .result-box {
+            border-radius: 16px;
+            padding: 25px;
+            margin-top: 30px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+            animation: fadeIn 0.5s ease-out;
+        }
+        .result-danger { background: rgba(220, 53, 69, 0.2); border-top: 5px solid #ff4d4f; box-shadow: 0 0 30px rgba(220, 53, 69, 0.3);}
+        .result-warning { background: rgba(243, 156, 18, 0.2); border-top: 5px solid #f39c12; box-shadow: 0 0 30px rgba(243, 156, 18, 0.3);}
+        .result-info { background: rgba(0, 123, 255, 0.2); border-top: 5px solid #4facfe; box-shadow: 0 0 30px rgba(0, 123, 255, 0.3);}
+
+        .result-box h4 { font-size: 1rem; color: #a0aec0; text-transform: uppercase; letter-spacing: 2px;}
+        .result-box h1 { font-size: 2.5rem; font-weight: 800; margin: 10px 0;}
+    </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-custom">
+        <div class="container d-flex justify-content-between align-items-center">
+            <div class="logo-container">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/4/46/Sonelgaz_logo.svg" alt="Sonelgaz Logo" height="40">
+            </div>
+            <div class="text-end">
+                <span class="badge bg-success" style="font-size: 0.8rem; letter-spacing: 1px;">SYSTEM ONLINE</span>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-5 mb-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+
+                <div class="glass-panel">
+                    <div class="text-center mb-5">
+                        <h2 style="font-weight: 800; letter-spacing: 1px;">AI DGA DIAGNOSTICS</h2>
+                        <p style="color: #cbd5e1; font-size: 1.1rem;">Industrial Transformer Predictive Maintenance</p>
+                    </div>
+
+                    <form method="POST" action="/">
+                        <div class="row g-4">
+                            <div class="col-md-4">
+                                <label class="form-label">Hydrogen (H2)</label>
+                                <input type="number" step="0.01" class="form-control text-center" name="h2" value="100" required>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label">Methane (CH4)</label>
+                                <input type="number" step="0.01" class="form-control text-center" name="ch4" value="50" required>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label">Ethane (C2H6)</label>
+                                <input type="number" step="0.01" class="form-control text-center" name="c2h6" value="20" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Ethylene (C2H4)</label>
+                                <input type="number" step="0.01" class="form-control text-center" name="c2h4" value="10" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Acetylene (C2H2)</label>
+                                <input type="number" step="0.01" class="form-control text-center" name="c2h2" value="5" required>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn-3d">Initiate Neural Analysis</button>
+                    </form>
+
+                    {% if error %}
+                    <div class="alert alert-danger mt-4" style="background: rgba(220,53,69,0.8); color: white; border: none; border-radius: 12px;">
+                        <strong>SYSTEM ERROR:</strong> {{ error }}
+                    </div>
+                    {% endif %}
+
+                    {% if result %}
+                    <div class="result-box result-{{ result.severity }}">
+                        <h4>AI Diagnosis Detected</h4>
+                        <h1>{{ result.diagnosis }}</h1>
+                        <hr style="border-color: rgba(255,255,255,0.2);">
+                        <p style="color: #cbd5e1; font-size: 0.9rem; margin-bottom: 0;">
+                            Processed Values (PPM) &rarr; H2: {{ result.inputs.H2 }} | CH4: {{ result.inputs.CH4 }} | C2H6: {{ result.inputs.C2H6 }} | C2H4: {{ result.inputs.C2H4 }} | C2H2: {{ result.inputs.C2H2 }}
+                        </p>
+                    </div>
+                    {% endif %}
+
+                </div>
+
+                <div class="text-center mt-4" style="color: #64748b; font-size: 0.85rem;">
+                    &copy; 2024 Sonelgaz Predictive Maintenance Project. Powered by Advanced ML.
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

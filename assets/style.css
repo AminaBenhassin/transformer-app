@@ -1,0 +1,58 @@
+/* --- الإعدادات العامة --- */
+.stApp {
+    background-color: #f4f6f9;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* --- العناوين --- */
+h1, h2, h3 {
+    color: #004b87 !important; /* أزرق سونلغاز */
+    font-weight: 700 !important;
+}
+
+/* --- الأزرار --- */
+.stButton>button {
+    background-color: #004b87;
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0 4px 6px rgba(0, 75, 135, 0.2);
+}
+.stButton>button:hover {
+    background-color: #f39c12; /* أصفر/برتقالي سونلغاز */
+    color: #ffffff;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(243, 156, 18, 0.3);
+}
+
+/* --- بطاقات النتيجة (Dynamic Result Cards) --- */
+.result-card {
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: 20px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+.danger-fault {
+    background-color: #fff1f0;
+    border-left: 8px solid #ff4d4f; /* أحمر للأعطال الخطيرة */
+}
+.warning-fault {
+    background-color: #fffbe6;
+    border-left: 8px solid #faad14; /* أصفر للأعطال المتوسطة */
+}
+.info-fault {
+    background-color: #e6f7ff;
+    border-left: 8px solid #1890ff; /* أزرق للأعطال العادية أو التفريغ الجزئي */
+}
+
+/* --- تخصيص القائمة الجانبية --- */
+[data-testid="stSidebar"] {
+    background-color: #002244;
+}
+[data-testid="stSidebar"] * {
+    color: #ffffff !important;
+}
