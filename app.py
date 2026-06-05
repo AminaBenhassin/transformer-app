@@ -11,265 +11,274 @@ import glob
 # PAGE CONFIG
 # ==============================
 st.set_page_config(
-    page_title="Sonelgaz DGA Analysis",
+    page_title="Sonelgaz DGA | Premium Suite",
     layout="wide",
     initial_sidebar_state="expanded"
 )
 
 # ==============================
-# CSS PROFESSIONNEL (comme avant)
+# ULTIMATE PREMIUM UI/UX CSS
 # ==============================
 st.markdown("""
 <style>
-/* Import Google Font */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+/* استدعاء خط عصري جداً ومريح للعين */
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
 
-* {
-    font-family: 'Inter', sans-serif;
+html, body, [class*="css"] {
+    font-family: 'Plus Jakarta Sans', sans-serif !important;
 }
 
+/* ========== FOND GLOBAL ET TYPOGRAPHIE ========== */
 .stApp {
-    background: linear-gradient(145deg, #F4F7FC 0%, #E9EEF5 100%);
+    background-color: #F4F7F9; /* لون مريح جداً للعين للعمل لساعات */
+    color: #1E293B;
 }
 
-/* SIDEBAR */
+/* ========== SIDEBAR PREMIUM ========== */
 section[data-testid="stSidebar"] {
-    background: linear-gradient(180deg, #FFFFFF 0%, #F8FAFE 100%);
-    border-right: 1px solid rgba(0,0,0,0.05);
-    box-shadow: 4px 0 12px rgba(0,0,0,0.02);
+    background-color: #FFFFFF;
+    border-right: 1px solid #E2E8F0;
+    padding-top: 2rem;
+}
+.sidebar-logo-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid #F1F5F9;
+    margin-bottom: 2rem;
+}
+.sidebar-logo {
+    width: 120px;
+    margin-bottom: 15px;
+    transition: transform 0.3s ease;
+}
+.sidebar-logo:hover {
+    transform: scale(1.05);
 }
 .sidebar-title {
     font-weight: 800;
-    font-size: 1.3rem;
-    background: linear-gradient(135deg, #1E3A6F, #F39C12);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    text-align: center;
-    margin: 1rem 0;
+    font-size: 1.2rem;
+    color: #0F172A;
+    letter-spacing: 0.5px;
 }
-.metric-card {
-    background: white;
-    border-radius: 20px;
-    padding: 1rem;
-    text-align: center;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.02);
-    border: 1px solid rgba(243,156,18,0.15);
-    transition: all 0.2s ease;
+
+/* ========== TOP BAR & HERO SECTION ========== */
+.hero-container {
+    background: #FFFFFF;
+    border-radius: 24px;
+    padding: 2.5rem;
+    margin-bottom: 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 10px 40px -10px rgba(0,0,0,0.05);
+    border: 1px solid #F1F5F9;
+    transition: all 0.3s ease;
 }
-.metric-card:hover {
+.hero-container:hover {
+    box-shadow: 0 15px 50px -10px rgba(0,0,0,0.08);
     transform: translateY(-2px);
-    box-shadow: 0 8px 24px rgba(0,0,0,0.05);
 }
-.metric-value {
+.hero-text h1 {
     font-size: 2rem;
     font-weight: 800;
-    background: linear-gradient(145deg, #F39C12, #E67E22);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
+    color: #0F172A;
+    margin: 0 0 8px 0;
 }
-
-/* TOP BAR */
-.top-bar {
-    background: white;
-    padding: 0.8rem 2rem;
-    border-radius: 80px;
-    margin-bottom: 2rem;
-    color: #1E3A6F;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    box-shadow: 0 6px 14px rgba(0,0,0,0.02);
-    border: 1px solid rgba(0,0,0,0.03);
-}
-.logo-text {
-    font-weight: 800;
-    font-size: 1.2rem;
-    background: linear-gradient(135deg, #1E3A6F, #F39C12);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-}
-.top-nav span {
-    margin-left: 1.5rem;
-    font-size: 0.9rem;
-    font-weight: 500;
-    color: #4B5563;
-    cursor: default;
-    transition: 0.2s;
-}
-.top-nav span:hover {
-    color: #F39C12;
-}
-
-/* HERO SECTION */
-.hero {
-    background: linear-gradient(135deg, #FFFFFF, #FEF9F0);
-    border-radius: 32px;
-    padding: 1.5rem 2rem;
-    margin-bottom: 2rem;
-    border: 1px solid rgba(243,156,18,0.2);
-    box-shadow: 0 12px 24px -12px rgba(0,0,0,0.08);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-}
-.hero h1 {
-    font-size: 1.8rem;
-    font-weight: 800;
-    background: linear-gradient(135deg, #1E3A6F, #F39C12);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
+.hero-text p {
+    color: #64748B;
+    font-size: 1rem;
     margin: 0;
+    font-weight: 500;
 }
-.hero p {
-    color: #6B7280;
-    margin-top: 0.3rem;
-}
-.stats {
+.hero-stats {
     display: flex;
-    gap: 2rem;
-    background: rgba(243,156,18,0.05);
-    padding: 0.8rem 1.5rem;
-    border-radius: 60px;
+    gap: 20px;
 }
-.stat-number {
-    font-weight: 800;
-    font-size: 1.4rem;
-    color: #F39C12;
-}
-
-/* DGA CARD */
-.dga-card {
-    background: white;
-    border-radius: 36px;
-    padding: 1.8rem;
-    margin-bottom: 2rem;
-    box-shadow: 0 12px 28px -8px rgba(0,0,0,0.05);
-    border: 1px solid rgba(0,0,0,0.02);
-    transition: all 0.2s;
-}
-.dga-card:hover {
-    box-shadow: 0 20px 32px -12px rgba(0,0,0,0.08);
-}
-.dga-title {
-    font-size: 1.3rem;
+.stat-pill {
+    background: #F8FAFC;
+    padding: 10px 20px;
+    border-radius: 50px;
+    border: 1px solid #E2E8F0;
     font-weight: 700;
-    color: #1E3A6F;
-    border-left: 5px solid #F39C12;
-    padding-left: 1rem;
-    margin-bottom: 1.5rem;
+    color: #3B82F6;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.stat-pill span {
+    color: #64748B;
+    font-weight: 500;
+    font-size: 0.9rem;
 }
 
-/* INPUTS */
+/* ========== INPUT CARDS & FORMS ========== */
+.input-section {
+    background: #FFFFFF;
+    border-radius: 24px;
+    padding: 2.5rem;
+    box-shadow: 0 10px 40px -10px rgba(0,0,0,0.05);
+    border: 1px solid #F1F5F9;
+    margin-bottom: 2rem;
+}
+.section-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #0F172A;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.section-title::before {
+    content: '';
+    display: inline-block;
+    width: 6px;
+    height: 24px;
+    background: #F59E0B;
+    border-radius: 4px;
+}
+
+/* Streamlit Native Inputs override */
 .stNumberInput label {
-    color: #1F2937 !important;
     font-weight: 600 !important;
-    font-size: 0.8rem !important;
+    color: #475569 !important;
+    font-size: 0.9rem !important;
 }
 div[data-baseweb="input"] {
-    background-color: #F9FAFB;
-    border-radius: 16px !important;
-    border: 1px solid #E5E7EB !important;
-    transition: 0.2s;
+    background-color: #F8FAFC !important;
+    border: 1px solid #E2E8F0 !important;
+    border-radius: 12px !important;
+    transition: all 0.3s ease !important;
 }
 div[data-baseweb="input"]:focus-within {
-    border-color: #F39C12 !important;
-    box-shadow: 0 0 0 3px rgba(243,156,18,0.2);
+    background-color: #FFFFFF !important;
+    border-color: #3B82F6 !important;
+    box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1) !important;
+}
+input {
+    font-weight: 700 !important;
+    color: #0F172A !important;
+    font-size: 1.1rem !important;
 }
 
-/* BUTTON */
+/* ========== PREMIUM ACTION BUTTON ========== */
 .stButton > button {
-    background: linear-gradient(145deg, #F39C12, #E67E22) !important;
+    background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%) !important;
+    color: white !important;
+    font-weight: 800 !important;
+    font-size: 1.1rem !important;
+    padding: 1rem !important;
     border: none !important;
-    border-radius: 60px !important;
-    font-weight: 700 !important;
-    font-size: 1rem !important;
-    padding: 0.6rem 1rem !important;
-    color: white;
-    box-shadow: 0 4px 12px rgba(243,156,18,0.3);
-    transition: 0.1s;
+    border-radius: 14px !important;
+    box-shadow: 0 10px 20px -5px rgba(245, 158, 11, 0.4) !important;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    width: 100% !important;
+    margin-top: 1.5rem !important;
 }
 .stButton > button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(243,156,18,0.4);
+    transform: translateY(-3px) !important;
+    box-shadow: 0 15px 25px -5px rgba(245, 158, 11, 0.5) !important;
 }
 .stButton > button:active {
-    transform: translateY(2px);
+    transform: translateY(1px) !important;
 }
 
-/* RESULT CARD */
+/* ========== DYNAMIC RESULT CARD ========== */
 .result-card {
-    background: linear-gradient(145deg, #FEF9F0, #FFFFFF);
-    border-radius: 32px;
-    padding: 1.5rem;
+    border-radius: 20px;
+    padding: 2.5rem;
     text-align: center;
-    margin: 1.5rem 0;
-    border: 1px solid rgba(243,156,18,0.3);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.04);
+    margin-top: 1rem;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    color: white;
+    box-shadow: 0 15px 30px -10px rgba(0,0,0,0.1);
+}
+.result-normal { background: linear-gradient(135deg, #10B981 0%, #059669 100%); }
+.result-warning { background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%); }
+.result-danger { background: linear-gradient(135deg, #EF4444 0%, #DC2626 100%); }
+
+.result-title {
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 700;
+    opacity: 0.9;
+    margin-bottom: 0.5rem;
 }
 .result-fault {
-    font-size: 1.8rem;
+    font-size: 2.5rem;
     font-weight: 800;
-    color: #1E3A6F;
-    margin: 0.5rem 0;
+    margin: 0;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 .result-confidence {
-    font-size: 1.5rem;
-    font-weight: 800;
-    background: linear-gradient(145deg, #F39C12, #E67E22);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
+    font-size: 1.1rem;
+    font-weight: 600;
+    background: rgba(255,255,255,0.2);
+    display: inline-block;
+    padding: 6px 16px;
+    border-radius: 50px;
+    margin-top: 1rem;
+    backdrop-filter: blur(5px);
 }
 
-/* PROBABILITY BARS */
-.prob-bar-container {
-    background: #EDF2F7;
-    border-radius: 40px;
-    margin: 12px 0;
+/* ========== PROBABILITY BARS ========== */
+.prob-container {
+    margin-top: 2rem;
+    padding: 2rem;
+    background: #FFFFFF;
+    border-radius: 20px;
+    box-shadow: 0 10px 40px -10px rgba(0,0,0,0.05);
+}
+.prob-item { margin-bottom: 1rem; }
+.prob-header {
+    display: flex;
+    justify-content: space-between;
+    font-weight: 600;
+    color: #475569;
+    font-size: 0.9rem;
+    margin-bottom: 6px;
+}
+.prob-track {
+    background: #F1F5F9;
+    border-radius: 50px;
+    height: 12px;
     overflow: hidden;
 }
 .prob-fill {
-    background: linear-gradient(90deg, #F39C12, #F4B944);
-    height: 32px;
-    line-height: 32px;
-    text-align: right;
-    padding-right: 14px;
-    color: white;
-    font-weight: 700;
-    font-size: 0.8rem;
-    border-radius: 40px 0 0 40px;
+    height: 100%;
+    border-radius: 50px;
+    transition: width 1s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* TABLE */
+/* ========== HISTORY TABLE ========== */
 .dataframe {
-    border-radius: 20px;
-    overflow: hidden;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
 }
 .dataframe th {
-    background: #1E3A6F !important;
-    color: white !important;
-    font-weight: 600;
+    background: #F8FAFC !important;
+    color: #475569 !important;
+    font-weight: 700 !important;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 12px 15px !important;
+    border-bottom: 2px solid #E2E8F0 !important;
 }
 .dataframe td {
-    background: white;
-    color: #1F2937;
+    padding: 12px 15px !important;
+    border-bottom: 1px solid #F1F5F9 !important;
+    color: #1E293B !important;
+    font-weight: 500;
+}
+.dataframe tr:hover td {
+    background: #F8FAFC !important;
 }
 
-/* FOOTER */
-.footer {
-    text-align: center;
-    margin-top: 2.5rem;
-    padding: 1rem;
-    border-top: 1px solid rgba(0,0,0,0.05);
-    color: #6B7280;
-    font-size: 0.75rem;
-}
 </style>
 """, unsafe_allow_html=True)
 
@@ -281,30 +290,18 @@ MODELS_DIR = os.path.join(base_dir, "models_saved")
 HISTORY_FILE = os.path.join(base_dir, "history.csv")
 
 
-# Liste des fichiers modèles (exclure scaler, encoder, label_encoder)
 def get_available_models():
-    if not os.path.exists(MODELS_DIR):
-        return []
+    if not os.path.exists(MODELS_DIR): return []
     all_pkl = glob.glob(os.path.join(MODELS_DIR, "*.pkl"))
     exclude_keywords = ['scaler', 'encoder', 'label']
-    models = []
-    for f in all_pkl:
-        name = os.path.basename(f).lower()
-        if not any(kw in name for kw in exclude_keywords):
-            models.append(f)
-    return models
+    return [f for f in all_pkl if not any(kw in os.path.basename(f).lower() for kw in exclude_keywords)]
 
 
 @st.cache_resource
 def load_scaler_encoder():
-    scaler_path = os.path.join(MODELS_DIR, "scaler.pkl")
-    encoder_path = os.path.join(MODELS_DIR, "encoder.pkl")
-    if not os.path.exists(scaler_path) or not os.path.exists(encoder_path):
-        return None, None, False
     try:
-        scaler = joblib.load(scaler_path)
-        encoder = joblib.load(encoder_path)
-        return scaler, encoder, True
+        return joblib.load(os.path.join(MODELS_DIR, "scaler.pkl")), joblib.load(
+            os.path.join(MODELS_DIR, "encoder.pkl")), True
     except:
         return None, None, False
 
@@ -312,39 +309,25 @@ def load_scaler_encoder():
 @st.cache_resource
 def load_selected_model(model_path):
     try:
-        model = joblib.load(model_path)
-        return model, True
+        return joblib.load(model_path), True
     except:
         return None, False
 
 
-# Chargement du scaler et encoder (fixes)
 scaler, encoder, scaler_ok = load_scaler_encoder()
-
-# Récupérer la liste des modèles disponibles
 model_files = get_available_models()
-if len(model_files) == 0:
-    st.error("Aucun modèle trouvé dans le dossier 'models_saved'. Vérifiez le répertoire.")
-    st.stop()
 
 
-# ==============================
-# FONCTIONS UTILITAIRES
-# ==============================
 def save_prediction(h2, ch4, c2h6, c2h4, c2h2, fault, conf):
     try:
         new_row = pd.DataFrame([{
-            "Date": datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+            "Date": datetime.datetime.now().strftime("%Y-%m-%d %H:%M"),
             "H2": h2, "CH4": ch4, "C2H6": c2h6, "C2H4": c2h4, "C2H2": c2h2,
-            "Diagnosis": fault,
-            "Confidence_%": round(conf, 2)
+            "Diagnosis": fault, "Confidence_%": round(conf, 1)
         }])
         if os.path.exists(HISTORY_FILE):
             old = pd.read_csv(HISTORY_FILE)
-            if list(old.columns) == list(new_row.columns):
-                pd.concat([old, new_row], ignore_index=True).to_csv(HISTORY_FILE, index=False)
-            else:
-                new_row.to_csv(HISTORY_FILE, index=False)
+            pd.concat([old, new_row], ignore_index=True).to_csv(HISTORY_FILE, index=False)
         else:
             new_row.to_csv(HISTORY_FILE, index=False)
     except:
@@ -356,152 +339,92 @@ def get_stats():
         if os.path.exists(HISTORY_FILE):
             df = pd.read_csv(HISTORY_FILE)
             return len(df), df.iloc[-1] if len(df) > 0 else None
-        return 0, None
     except:
-        return 0, None
+        pass
+    return 0, None
 
 
-def clear_history():
-    if os.path.exists(HISTORY_FILE):
-        os.remove(HISTORY_FILE)
-        return True
-    return False
-
-
-# ==============================
-# SESSION STATE INIT
-# ==============================
-if "confirm_clear" not in st.session_state:
-    st.session_state.confirm_clear = False
 if "selected_model_path" not in st.session_state:
-    # Par défaut, prendre le premier modèle (ou fine_tree_real.pkl si présent)
-    default = None
-    for f in model_files:
-        if "fine_tree_real" in f:
-            default = f
-            break
-    if default is None and len(model_files) > 0:
-        default = model_files[0]
-    st.session_state.selected_model_path = default
+    st.session_state.selected_model_path = model_files[0] if model_files else None
 
 # ==============================
-# SIDEBAR (avec sélection de modèle et effacement)
+# SIDEBAR
 # ==============================
 with st.sidebar:
-    st.markdown('<div class="sidebar-title">⚡ SONELGAZ DGA</div>', unsafe_allow_html=True)
+    st.markdown("""
+    <div class="sidebar-logo-container">
+        <img class="sidebar-logo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Sonelgaz_logo.svg/512px-Sonelgaz_logo.svg.png">
+        <div class="sidebar-title">SONELGAZ AI LAB</div>
+    </div>
+    """, unsafe_allow_html=True)
 
-    # Sélection du modèle
-    st.markdown("### 🤖 Sélection du modèle")
-    model_names = [os.path.basename(p) for p in model_files]
-    current_name = os.path.basename(st.session_state.selected_model_path) if st.session_state.selected_model_path else \
-    model_names[0]
-    selected_name = st.selectbox("Choisissez un modèle:", model_names,
-                                 index=model_names.index(current_name) if current_name in model_names else 0)
-    # Mettre à jour le chemin sélectionné
-    new_path = os.path.join(MODELS_DIR, selected_name)
-    if new_path != st.session_state.selected_model_path:
-        st.session_state.selected_model_path = new_path
-        # Forcer le rechargement du modèle (cache)
-        st.cache_resource.clear()
-        st.rerun()
+    st.markdown(
+        "<p style='color:#64748B; font-weight:600; font-size:0.8rem; text-transform:uppercase;'>Configuration</p>",
+        unsafe_allow_html=True)
+    if model_files:
+        model_names = [os.path.basename(p) for p in model_files]
+        current_name = os.path.basename(
+            st.session_state.selected_model_path) if st.session_state.selected_model_path else model_names[0]
+        selected_name = st.selectbox("Modèle IA Actif", model_names, index=model_names.index(current_name))
+        new_path = os.path.join(MODELS_DIR, selected_name)
+        if new_path != st.session_state.selected_model_path:
+            st.session_state.selected_model_path = new_path
+            st.cache_resource.clear()
+            st.rerun()
 
-    # Charger le modèle sélectionné
     model, model_ok = load_selected_model(st.session_state.selected_model_path)
 
-    # Afficher les statistiques
-    total_analyses, last_diag = get_stats()
-    col1, col2 = st.columns(2)
-    with col1:
+    if os.path.exists(HISTORY_FILE):
         st.markdown(
-            f"<div class='metric-card'><div class='metric-value'>{total_analyses}</div><div>Analyses</div></div>",
+            "<br><p style='color:#64748B; font-weight:600; font-size:0.8rem; text-transform:uppercase;'>Maintenance</p>",
             unsafe_allow_html=True)
-    with col2:
-        if last_diag is not None:
-            st.markdown(
-                f"<div class='metric-card'><div>Last</div><div style='font-weight:600;'>{last_diag['Diagnosis'][:12]}</div></div>",
-                unsafe_allow_html=True)
-        else:
-            st.markdown("<div class='metric-card'>No data</div>", unsafe_allow_html=True)
-    st.markdown("---")
-
-    # Statut du modèle
-    if model_ok and scaler_ok:
-        st.success(f"✅ Modèle chargé: {selected_name}")
-    else:
-        st.error("⚠️ Problème de chargement (modèle ou scaler/encoder)")
-
-    # Bouton effacer historique
-    if os.path.exists(HISTORY_FILE) and total_analyses > 0:
-        st.markdown("---")
-        if st.button("🗑️ Clear History", use_container_width=True):
-            st.session_state.confirm_clear = True
-
-    if st.session_state.confirm_clear:
-        st.warning("⚠️ Are you sure? This will delete all diagnostic history permanently.")
-        col_c1, col_c2 = st.columns(2)
-        with col_c1:
-            if st.button("✅ Yes, clear"):
-                if clear_history():
-                    st.success("History cleared successfully!")
-                    st.session_state.confirm_clear = False
-                    st.rerun()
-                else:
-                    st.error("Could not delete file.")
-        with col_c2:
-            if st.button("❌ Cancel"):
-                st.session_state.confirm_clear = False
-                st.rerun()
-
-    st.caption("Industrial DGA v3.0 · Choix du modèle")
+        if st.button("Effacer l'historique", use_container_width=True):
+            os.remove(HISTORY_FILE)
+            st.rerun()
 
 # ==============================
-# RESTE DE L'INTERFACE (identique)
+# MAIN CONTENT
 # ==============================
-st.markdown("""
-<div class="top-bar">
-    <div class="logo-text">🔬 SONELGAZ · DISSOLVED GAS ANALYSIS</div>
-    <div class="top-nav">
-        <span>📊 Dashboard</span>
-        <span>⚙️ Diagnostics</span>
-        <span>📜 History</span>
-    </div>
-</div>
-""", unsafe_allow_html=True)
-
 total_analyses, _ = get_stats()
+
+# Hero Section
 st.markdown(f"""
-<div class="hero">
-    <div>
-        <h1>Predictive Maintenance Hub</h1>
-        <p>Neural network classification · IEC 60599 compliant</p>
+<div class="hero-container">
+    <div class="hero-text">
+        <h1>Analyse DGA Intelligente</h1>
+        <p>Diagnostic de l'état de santé des transformateurs assisté par IA.</p>
     </div>
-    <div class="stats">
-        <div><span class="stat-number">{total_analyses}</span> total analyses</div>
-        <div><span class="stat-number">99.2%</span> accuracy</div>
+    <div class="hero-stats">
+        <div class="stat-pill">{total_analyses} <span>Analyses</span></div>
+        <div class="stat-pill">99.2% <span>Précision</span></div>
     </div>
 </div>
 """, unsafe_allow_html=True)
 
-with st.container():
-    st.markdown('<div class="dga-card">', unsafe_allow_html=True)
-    st.markdown('<div class="dga-title">🧪 Gas concentrations (ppm)</div>', unsafe_allow_html=True)
-    col1, col2, col3 = st.columns(3)
-    with col1:
-        H2 = st.number_input("Hydrogen (H₂)", min_value=0.0, max_value=50000.0, value=100.0, step=10.0)
-        CH4 = st.number_input("Methane (CH₄)", min_value=0.0, max_value=50000.0, value=50.0, step=5.0)
-    with col2:
-        C2H6 = st.number_input("Ethane (C₂H₆)", min_value=0.0, max_value=50000.0, value=20.0, step=5.0)
-        C2H4 = st.number_input("Ethylene (C₂H₄)", min_value=0.0, max_value=50000.0, value=10.0, step=2.0)
-    with col3:
-        C2H2 = st.number_input("Acetylene (C₂H₂)", min_value=0.0, max_value=50000.0, value=5.0, step=1.0)
-        run = st.button("🚀 Run diagnostics", use_container_width=True)
-    st.markdown('</div>', unsafe_allow_html=True)
+# Input Section
+st.markdown('<div class="input-section">', unsafe_allow_html=True)
+st.markdown('<div class="section-title">Saisie des gaz dissous (ppm)</div>', unsafe_allow_html=True)
 
+col1, col2, col3 = st.columns(3)
+with col1:
+    H2 = st.number_input("Hydrogène (H₂)", min_value=0.0, value=100.0, step=10.0)
+    CH4 = st.number_input("Méthane (CH₄)", min_value=0.0, value=50.0, step=5.0)
+with col2:
+    C2H6 = st.number_input("Éthane (C₂H₆)", min_value=0.0, value=20.0, step=5.0)
+    C2H4 = st.number_input("Éthylène (C₂H₄)", min_value=0.0, value=10.0, step=2.0)
+with col3:
+    C2H2 = st.number_input("Acétylène (C₂H₂)", min_value=0.0, value=5.0, step=1.0)
+    st.markdown("<div style='height: 4px;'></div>", unsafe_allow_html=True)  # spacer
+    run = st.button("Générer le diagnostic IA")
+
+st.markdown('</div>', unsafe_allow_html=True)
+
+# Prediction Logic
 if run:
     if not model_ok or not scaler_ok:
-        st.error("Models not loaded properly. Check model files and scaler/encoder.")
+        st.error("Le modèle IA n'est pas prêt.")
     else:
-        with st.spinner("Computing..."):
+        with st.spinner("Analyse des schémas neuronaux en cours..."):
             try:
                 gases = ["H2", "CH4", "C2H6", "C2H4", "C2H2"]
                 input_df = pd.DataFrame([[H2, CH4, C2H6, C2H4, C2H2]], columns=gases)
@@ -520,48 +443,61 @@ if run:
 
                 save_prediction(H2, CH4, C2H6, C2H4, C2H2, fault, confidence)
 
+                # تحديد اللون بناءً على نوع العطل
+                theme_class = "result-normal"
+                bar_color = "#10B981"
+                if "Arc" in fault or "High" in fault:
+                    theme_class = "result-danger"
+                    bar_color = "#EF4444"
+                elif "Spark" in fault or "Middle" in fault:
+                    theme_class = "result-warning"
+                    bar_color = "#F59E0B"
+
+                # Display Result
                 st.markdown(f"""
-                <div class="result-card">
-                    <div style="font-size:0.8rem; font-weight:600; color:#F39C12;">DIAGNOSTIC RESULT</div>
-                    <div class="result-fault">{fault}</div>
-                    <div class="result-confidence">{confidence:.1f}% confidence</div>
+                <div class="result-card {theme_class}">
+                    <div class="result-title">Verdict de l'Intelligence Artificielle</div>
+                    <h2 class="result-fault">{fault}</h2>
+                    <div class="result-confidence">Taux de confiance : {confidence:.1f}%</div>
                 </div>
                 """, unsafe_allow_html=True)
 
-                st.markdown("#### 📊 Probability distribution")
-                classes = encoder.classes_
-                prob_df = pd.DataFrame({"Fault": classes, "Prob": proba * 100}).sort_values("Prob", ascending=False)
+                # Probability Distribution
+                st.markdown('<div class="prob-container">', unsafe_allow_html=True)
+                st.markdown('<div class="section-title">Distribution des probabilités</div>', unsafe_allow_html=True)
+
+                prob_df = pd.DataFrame({"Fault": encoder.classes_, "Prob": proba * 100}).sort_values("Prob",
+                                                                                                     ascending=False)
                 for _, row in prob_df.iterrows():
                     p = row["Prob"]
                     name = row["Fault"]
+                    color = bar_color if name == fault else "#CBD5E1"  # Highlight winning prob
                     st.markdown(f"""
-                    <div style="margin-bottom: 12px;">
-                        <div style="display:flex; justify-content:space-between; font-size:0.85rem;">
+                    <div class="prob-item">
+                        <div class="prob-header">
                             <span>{name}</span>
                             <span>{p:.1f}%</span>
                         </div>
-                        <div class="prob-bar-container">
-                            <div class="prob-fill" style="width: {p:.1f}%;">{p:.1f}%</div>
+                        <div class="prob-track">
+                            <div class="prob-fill" style="width: {p}%; background-color: {color};"></div>
                         </div>
                     </div>
                     """, unsafe_allow_html=True)
+                st.markdown('</div>', unsafe_allow_html=True)
+
             except Exception as e:
-                st.error(f"Prediction error: {e}")
-                st.code(traceback.format_exc())
+                st.error(f"Erreur d'analyse: {e}")
 
-st.markdown("---")
-st.markdown("#### 📋 Recent diagnoses")
-try:
-    if os.path.exists(HISTORY_FILE):
-        hist = pd.read_csv(HISTORY_FILE)
-        if not hist.empty:
-            st.dataframe(hist.tail(8), use_container_width=True)
-        else:
-            st.info("No history yet.")
+# History Section
+st.markdown('<div class="input-section">', unsafe_allow_html=True)
+st.markdown('<div class="section-title">Historique des opérations</div>', unsafe_allow_html=True)
+if os.path.exists(HISTORY_FILE):
+    hist = pd.read_csv(HISTORY_FILE)
+    if not hist.empty:
+        # ترتيب عكسي لظهور الأحدث أولاً
+        st.dataframe(hist.iloc[::-1].reset_index(drop=True), use_container_width=True, height=300)
     else:
-        st.info("No history file. First prediction will create it.")
-except Exception as e:
-    st.warning(f"Could not load history: {e}")
-
-st.markdown('<div class="footer">Sonelgaz DGA · Neural Classifier · Production ready · Model selection enabled</div>',
-            unsafe_allow_html=True)
+        st.info("La base de données est vide.")
+else:
+    st.info("Effectuez votre premier diagnostic pour initialiser l'historique.")
+st.markdown('</div>', unsafe_allow_html=True)
