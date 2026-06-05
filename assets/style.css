@@ -1,58 +1,151 @@
-/* --- الإعدادات العامة --- */
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap');
+
+* {
+    font-family: 'Inter', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* ===== DARK GRADIENT BACKGROUND WITH ANIMATION ===== */
+@keyframes gradientBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
 .stApp {
-    background-color: #f4f6f9;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+    background-size: 200% 200%;
+    animation: gradientBG 15s ease infinite;
+    color: #EAEAEA;
 }
 
-/* --- العناوين --- */
-h1, h2, h3 {
-    color: #004b87 !important; /* أزرق سونلغاز */
-    font-weight: 700 !important;
+/* ===== GLASSMORPHISM EFFECT ===== */
+.glass-card {
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 20px;
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.glass-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(0,0,0,0.6);
 }
 
-/* --- الأزرار --- */
-.stButton>button {
-    background-color: #004b87;
-    color: #ffffff;
-    border: none;
-    border-radius: 8px;
-    padding: 10px 20px;
-    font-size: 16px;
-    font-weight: bold;
-    transition: all 0.3s ease-in-out;
-    box-shadow: 0 4px 6px rgba(0, 75, 135, 0.2);
+/* ===== SIDEBAR ===== */
+section[data-testid="stSidebar"] {
+    background: rgba(20, 20, 20, 0.6);
+    backdrop-filter: blur(10px);
+    border-right: 1px solid rgba(255,255,255,0.1);
 }
-.stButton>button:hover {
-    background-color: #f39c12; /* أصفر/برتقالي سونلغاز */
-    color: #ffffff;
+.sidebar-title {
+    font-weight: 800;
+    font-size: 1.3rem;
+    color: #FFFFFF;
+    text-align: center;
+    letter-spacing: 1px;
+}
+
+/* ===== TOP BAR ===== */
+.top-bar {
+    background: rgba(255,255,255,0.05);
+    backdrop-filter: blur(12px);
+    border-radius: 40px;
+    padding: 0.8rem 2rem;
+    margin: 1rem 1.5rem 2rem 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid rgba(255,255,255,0.1);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+    transition: transform 0.2s ease;
+}
+.top-bar:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 12px rgba(243, 156, 18, 0.3);
+}
+.logo-text {
+    font-weight: 700;
+    font-size: 1rem;
+    color: #FFFFFF;
 }
 
-/* --- بطاقات النتيجة (Dynamic Result Cards) --- */
+/* ===== BUTTONS ===== */
+.stButton > button {
+    background: linear-gradient(145deg, #ff6a00, #ee0979);
+    border: none;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 0.9rem;
+    padding: 0.6rem 1.2rem;
+    color: white;
+    box-shadow: 0 6px 0 #7a1f3d, 0 4px 12px rgba(0,0,0,0.4);
+    transition: all 0.15s ease;
+}
+.stButton > button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 0 #7a1f3d, 0 8px 18px rgba(0,0,0,0.5);
+}
+.stButton > button:active {
+    transform: translateY(3px);
+    box-shadow: 0 2px 0 #7a1f3d;
+}
+
+/* ===== RESULT CARD ===== */
 .result-card {
-    padding: 20px;
-    border-radius: 10px;
-    margin-top: 20px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    background: rgba(255,255,255,0.08);
+    border-radius: 24px;
+    padding: 1.2rem;
+    text-align: center;
+    margin: 1rem 1.5rem;
+    border: 1px solid rgba(255,255,255,0.2);
+    backdrop-filter: blur(10px);
+    animation: glowPulse 2s infinite alternate;
 }
-.danger-fault {
-    background-color: #fff1f0;
-    border-left: 8px solid #ff4d4f; /* أحمر للأعطال الخطيرة */
+@keyframes glowPulse {
+    0% { box-shadow: 0 0 10px rgba(255,105,180,0.3); }
+    100% { box-shadow: 0 0 25px rgba(255,105,180,0.6); }
 }
-.warning-fault {
-    background-color: #fffbe6;
-    border-left: 8px solid #faad14; /* أصفر للأعطال المتوسطة */
+.result-fault {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: #FFFFFF;
 }
-.info-fault {
-    background-color: #e6f7ff;
-    border-left: 8px solid #1890ff; /* أزرق للأعطال العادية أو التفريغ الجزئي */
+.result-confidence {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #ff6a00;
 }
 
-/* --- تخصيص القائمة الجانبية --- */
-[data-testid="stSidebar"] {
-    background-color: #002244;
+/* ===== PROBABILITY BARS ===== */
+.prob-bar-container {
+    background: rgba(255,255,255,0.1);
+    border-radius: 30px;
+    margin: 12px 0;
+    overflow: hidden;
 }
-[data-testid="stSidebar"] * {
-    color: #ffffff !important;
+.prob-fill {
+    background: linear-gradient(90deg, #ff6a00, #ee0979);
+    height: 28px;
+    line-height: 28px;
+    text-align: right;
+    padding-right: 12px;
+    color: white;
+    font-weight: 700;
+    font-size: 0.75rem;
+    border-radius: 30px;
+    transition: width 0.5s ease;
 }
+
+/* ===== FOOTER ===== */
+.footer {
+    text-align: center;
+    margin-top: 2rem;
+    padding: 1rem;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    color: #AAAAAA;
+    font-size: 0.7rem;
+}
+</style>
