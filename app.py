@@ -12,7 +12,24 @@ import base64
 # ==============================
 st.set_page_config(page_title="PowerGuard | Système Expert DGA", layout="wide", initial_sidebar_state="expanded")
 
+st.markdown("""
+<style>
 
+#MainMenu {visibility: hidden;}
+footer {visibility: hidden;}
+header {visibility: hidden;}
+
+/* اخفاء Deploy و GitHub */
+[data-testid="stToolbar"] {display: none;}
+[data-testid="stDecoration"] {display: none;}
+[data-testid="stStatusWidget"] {display: none;}
+[data-testid="stHeader"] {display: none;}
+
+/* اخفاء كلمة Streamlit */
+.css-18e3th9 {padding-top: 0rem;}
+
+</style>
+""", unsafe_allow_html=True)
 def get_base64_image(image_path):
     try:
         with open(image_path, "rb") as img_file:
