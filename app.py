@@ -44,33 +44,36 @@ section[data-testid="stSidebar"] { background: #FFFFFF; border-right: 1px solid 
 .sidebar-logo { width: 160px; margin-bottom: 20px; transition: transform 0.3s; }
 .sidebar-logo:hover { transform: scale(1.05); }
 
-/* MENU AMÉLIORÉ */
-div.row-widget.stRadio > div { gap: 10px; padding: 10px; }
+/* MENU */
+div.row-widget.stRadio > div { gap: 15px; padding: 10px 0; }
 div.row-widget.stRadio > div > label {
     background-color: #F8FAFC;
-    padding: 14px 18px;
-    border-radius: 10px;
+    padding: 16px 20px;
+    border-radius: 12px;
     border: 1px solid #E2E8F0;
     cursor: pointer;
-    font-weight: 600;
+    font-weight: 700;
     color: #475569 !important;
-    transition: all 0.2s ease;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.02);
 }
 div.row-widget.stRadio > div > label:hover {
-    background-color: #F1F5F9;
+    background-color: #FFFFFF;
     border-color: #00A8E8;
+    transform: translateX(5px);
 }
 div.row-widget.stRadio > div > label[data-checked="true"] {
     background-color: #0F2C59 !important;
     color: white !important;
     border-color: #0F2C59;
-    border-left: 6px solid #FF7A00 !important;
+    border-left: 5px solid #FF7A00;
+    box-shadow: 0 8px 15px rgba(15, 44, 89, 0.2);
 }
 div.row-widget.stRadio > div > label > div:first-child { display: none; } 
 
 .dga-card { background: white; padding: 2.5rem; border-radius: 16px; box-shadow: 0 4px 15px rgba(0,0,0,0.03); margin-bottom: 2rem; }
 
-/* ANIMATION DES GAZ */
+/* ANIMATION DES GAZ (3D EFFECT) */
 .sensors-container { 
     display: flex; justify-content: space-around; align-items: center; 
     margin: 1.5rem 0 3rem 0; padding: 2.5rem 1rem; 
@@ -80,8 +83,9 @@ div.row-widget.stRadio > div > label > div:first-child { display: none; }
 .gas-orb-wrapper { display: flex; flex-direction: column; align-items: center; width: 100px; }
 .gas-orb { 
     position: relative; width: 85px; height: 85px; border-radius: 50%; 
-    background: #FFFFFF; display: flex; align-items: center; justify-content: center; 
-    box-shadow: 0 8px 20px rgba(15, 44, 89, 0.08); 
+    background: radial-gradient(circle at 30% 30%, #ffffff, #cbd5e1);
+    display: flex; align-items: center; justify-content: center; 
+    box-shadow: 0 10px 20px rgba(0,0,0,0.15), inset -5px -5px 10px rgba(0,0,0,0.1); 
     animation: floatOrb 4s ease-in-out infinite; 
 }
 .gas-orb-wrapper:nth-child(2) .gas-orb { animation-delay: 0.5s; }
