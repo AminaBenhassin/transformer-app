@@ -12,24 +12,7 @@ import base64
 # ==============================
 st.set_page_config(page_title="PowerGuard | Système Expert DGA", layout="wide", initial_sidebar_state="expanded")
 
-st.markdown("""
-<style>
 
-#MainMenu {visibility: hidden;}
-footer {visibility: hidden;}
-header {visibility: hidden;}
-
-/* اخفاء Deploy و GitHub */
-[data-testid="stToolbar"] {display: none;}
-[data-testid="stDecoration"] {display: none;}
-[data-testid="stStatusWidget"] {display: none;}
-[data-testid="stHeader"] {display: none;}
-
-/* اخفاء كلمة Streamlit */
-.css-18e3th9 {padding-top: 0rem;}
-
-</style>
-""", unsafe_allow_html=True)
 def get_base64_image(image_path):
     try:
         with open(image_path, "rb") as img_file:
@@ -87,29 +70,31 @@ div.row-widget.stRadio > div > label > div:first-child { display: none; }
 
 .dga-card { background: white; padding: 2.5rem; border-radius: 16px; box-shadow: 0 4px 15px rgba(0,0,0,0.03); margin-bottom: 2rem; }
 
-/* =========================================
-   UI/UX DES CHAMPS DE SAISIE (FORCÉ)
-   ========================================= */
+/* AMÉLIORATION UI/UX DES CHAMPS DE SAISIE (INPUTS) */
 div[data-testid="stNumberInput"] label p {
-    color: #1E293B !important;
-    font-size: 0.95rem !important;
-    font-weight: 600 !important;
+    color: #334155;
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin-bottom: 4px;
 }
-/* استهداف الصندوق نفسه بقوة */
-div[data-testid="stNumberInput"] > div > div > div {
-    background-color: #F1F5F9 !important; 
+div[data-baseweb="input"] {
+    background-color: #F1F5F9 !important; /* لون رمادي فاتح مريح */
     border: 1px solid #E2E8F0 !important;
     border-radius: 8px !important;
+    transition: all 0.3s ease;
 }
-/* التأثير عند الضغط (Focus) */
-div[data-testid="stNumberInput"] > div > div > div:focus-within {
-    border-color: #FF7A00 !important;
-    box-shadow: 0 0 0 1.5px #FF7A00 !important;
+div[data-baseweb="input"]:focus-within {
+    border-color: #FF7A00 !important; /* إطار برتقالي عند التحديد كما في الصورة */
     background-color: #FFFFFF !important;
+    box-shadow: 0 0 0 1px #FF7A00 !important;
 }
-div[data-testid="stNumberInput"] input {
+div[data-baseweb="input"] input {
     color: #1E293B !important;
-    font-weight: 600 !important;
+    font-weight: 500 !important;
+    background-color: transparent !important;
+}
+div[data-baseweb="input"] button {
+    color: #0F2C59 !important;
 }
 
 /* ANIMATION DES GAZ (3D EFFECT) */
