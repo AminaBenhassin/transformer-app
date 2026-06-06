@@ -44,34 +44,56 @@ section[data-testid="stSidebar"] { background: #FFFFFF; border-right: 1px solid 
 .sidebar-logo { width: 160px; margin-bottom: 20px; transition: transform 0.3s; }
 .sidebar-logo:hover { transform: scale(1.05); }
 
-/* MENU */
-div.row-widget.stRadio > div { gap: 15px; padding: 10px 0; }
+/* MENU AMÉLIORÉ */
+div.row-widget.stRadio > div { gap: 10px; padding: 10px; }
 div.row-widget.stRadio > div > label {
     background-color: #F8FAFC;
-    padding: 16px 20px;
-    border-radius: 12px;
+    padding: 14px 18px;
+    border-radius: 10px;
     border: 1px solid #E2E8F0;
     cursor: pointer;
-    font-weight: 700;
+    font-weight: 600;
     color: #475569 !important;
-    transition: all 0.3s ease;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+    transition: all 0.2s ease;
 }
 div.row-widget.stRadio > div > label:hover {
-    background-color: #FFFFFF;
+    background-color: #F1F5F9;
     border-color: #00A8E8;
-    transform: translateX(5px);
 }
 div.row-widget.stRadio > div > label[data-checked="true"] {
     background-color: #0F2C59 !important;
     color: white !important;
     border-color: #0F2C59;
-    border-left: 5px solid #FF7A00;
-    box-shadow: 0 8px 15px rgba(15, 44, 89, 0.2);
+    border-left: 6px solid #FF7A00 !important;
 }
 div.row-widget.stRadio > div > label > div:first-child { display: none; } 
 
 .dga-card { background: white; padding: 2.5rem; border-radius: 16px; box-shadow: 0 4px 15px rgba(0,0,0,0.03); margin-bottom: 2rem; }
+
+/* =========================================
+   UI/UX DES CHAMPS DE SAISIE (FORCÉ)
+   ========================================= */
+div[data-testid="stNumberInput"] label p {
+    color: #1E293B !important;
+    font-size: 0.95rem !important;
+    font-weight: 600 !important;
+}
+/* استهداف الصندوق نفسه بقوة */
+div[data-testid="stNumberInput"] > div > div > div {
+    background-color: #F1F5F9 !important; 
+    border: 1px solid #E2E8F0 !important;
+    border-radius: 8px !important;
+}
+/* التأثير عند الضغط (Focus) */
+div[data-testid="stNumberInput"] > div > div > div:focus-within {
+    border-color: #FF7A00 !important;
+    box-shadow: 0 0 0 1.5px #FF7A00 !important;
+    background-color: #FFFFFF !important;
+}
+div[data-testid="stNumberInput"] input {
+    color: #1E293B !important;
+    font-weight: 600 !important;
+}
 
 /* ANIMATION DES GAZ (3D EFFECT) */
 .sensors-container { 
@@ -241,7 +263,7 @@ if menu == "Analyse DGA":
         with col3:
             C2H2 = st.number_input("Acétylène (C₂H₂)", value=5.0, step=1.0)
             st.markdown("<div style='height: 25px;'></div>", unsafe_allow_html=True)
-            run = st.button("Predire")
+            run = st.button("PREDIRE")
         st.markdown('</div>', unsafe_allow_html=True)
 
     if run:
@@ -287,18 +309,18 @@ if menu == "Analyse DGA":
                 prob_df = pd.DataFrame({"Fault": encoder.classes_, "Prob": proba * 100}).sort_values("Prob",
                                                                                                      ascending=False)
 
-                html_bars = '<div style="background:white; padding:1.5rem 2rem; border-radius:12px; border:1px solid #E2E8F0; box-shadow:0 4px 15px rgba(0,0,0,0.03);">'
+                html_bars = '<div style="background:white; padding:1.5rem 2rem; border-radius:12px; border:1px solid #E2E8F0; box-shadow:0 4px 15px rgba(0,0,0,0.05);">'
                 for _, row in prob_df.iterrows():
                     p = row["Prob"]
                     name = row["Fault"]
                     bg_color = "#FF7A00" if name == fault else "#0F2C59"
                     html_bars += f"""
-                    <div style="margin-bottom: 12px;">
-                        <div style="display:flex; justify-content:space-between; font-size:0.9rem; font-weight:700; color:#1E293B; margin-bottom:4px;">
+                    <div style="margin-bottom: 15px;">
+                        <div style="display:flex; justify-content:space-between; font-size:0.95rem; font-weight:700; color:#0F2C59; margin-bottom:6px;">
                             <span>{name}</span><span>{p:.1f}%</span>
                         </div>
-                        <div style="background:#EDF2F7; border-radius:30px; height:24px; overflow:hidden;">
-                            <div style="width:{p:.1f}%; background:{bg_color}; height:100%; border-radius:30px;"></div>
+                        <div style="background:#E2E8F0; border-radius:30px; height:20px; overflow:hidden; border: 1px solid #CBD5E1;">
+                            <div style="width:{p:.1f}%; background:{bg_color}; height:100%; border-radius:30px; box-shadow: 0 2px 4px rgba(0,0,0,0.2);"></div>
                         </div>
                     </div>"""
                 html_bars += '</div>'
